@@ -1,13 +1,13 @@
 'use strict'
 
 var userName = document.querySelector('#username');
-var userNameError = document.querySelector('#username + .auth_error_hide');
+var userNameError = document.querySelector('#username + .auth__error');
 
 var userEmail = document.querySelector('#useremail');
-var userEmailError = document.querySelector('#useremail + .auth_error_hide');
+var userEmailError = document.querySelector('#useremail + .auth__error');
 
 var userPhone = document.querySelector('#userphone');
-var userPhoneError = document.querySelector('#userphone + .auth_error_hide');
+var userPhoneError = document.querySelector('#userphone + .auth__error');
 
 var userPass = document.querySelector('#userepass');
 var userSubscribe = document.querySelector('#usersubscribe');
