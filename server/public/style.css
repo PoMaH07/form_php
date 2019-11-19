@@ -103,3 +103,9 @@ ul li {
     color: red;
     padding-top: 10px;
 }
+.auth_error_hide {
+    display: none;
+}
+.auth_error_show {
+    display: block;
+}
