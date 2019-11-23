@@ -1,61 +1,69 @@
 'use strict'
 
-var userName = document.querySelector('#username');
-var userNameError = document.querySelector('#username + .auth__error');
+var formManager = {
+    name: document.querySelector('#username'),
+    nameError: document.querySelector('#username + .auth__error'),
+    email: document.querySelector('#useremail'),
+    emailError: document.querySelector('#useremail + .auth__error'),
+    phone: document.querySelector('#userphone'),
+    phoneError: document.querySelector('#userphone + .auth__error'),
+    password: document.querySelector('#userpass'),
+    passwordError: document.querySelector('#userpass + .auth__error'),
+    subscribe: document.querySelector('#usersubscribe'),
+    sendBtn: document.querySelector('#sendbtn'),
 
-var userEmail = document.querySelector('#useremail');
-var userEmailError = document.querySelector('#useremail + .auth__error');
-
-var userPhone = document.querySelector('#userphone');
-var userPhoneError = document.querySelector('#userphone + .auth__error');
-
-var userPass = document.querySelector('#userepass');
-var userSubscribe = document.querySelector('#usersubscribe');
-
-var sendBtn = document.querySelector('#sendbtn');
+};
 
 
+formManager.valid = function() {
 
-function send() {
+    var isNotError = true;
 
-    var isError = false;
-
-    if (!(/^[A-ZА-Я0-9\-\.\ ]{2,15}$/i.test(userName.value))) {
-        userNameError.classList.remove('auth_error_hide');
-        userNameError.classList.add('auth_error_show');
-        isError = true;
+    if (!(/^[A-ZА-Я0-9\-\.\ ]{2,15}$/i.test(formManager.name.value))) {
+        this.nameError.classList.remove('auth_error_hide');
+        this.nameError.classList.add('auth_error_show');
+        isNotError = false;
     }
 
-    if (!(/^[a-z0-9.\-_]{1,15}@[a-z0-9.\-_]{1,25}\.[a-z]{1,10}$/i.test(userEmail.value))) {
-        userEmailError.classList.remove('auth_error_hide');
-        userEmailError.classList.add('auth_error_show');
-        isError = true;
+    if (!(/^[a-z0-9.\-_]{1,15}@[a-z0-9.\-_]{1,25}\.[a-z]{1,10}$/i.test(formManager.email.value))) {
+        this.emailError.classList.remove('auth_error_hide');
+        this.emailError.classList.add('auth_error_show');
+        isNotError = false;
     }
 
-    if (!(/^(\+380|80|0|380){1,4}[0-9]{3,15}$/.test(userPhone.value))) {
-        userPhoneError.classList.remove('auth_error_hide');
-        userPhoneError.classList.add('auth_error_show');
-        isError = true;
+    if (!(/^(\+380|80|0|380){1,4}[0-9]{3,15}$/.test(formManager.phone.value))) {
+        this.phoneError.classList.remove('auth_error_hide');
+        this.phoneError.classList.add('auth_error_show');
+        isNotError = false;
+    }
+
+    if (!(/^[A-ZА-Я0-9\-\.\ ]{2,15}$/i.test(formManager.password.value))) {
+        this.passwordError.classList.remove('auth_error_hide');
+        this.passwordError.classList.add('auth_error_show');
+        isNotError = false;
     }
     
-    if(isError) return null;
+    return isNotError;
+}
+
+formManager.send = function() {
+
+    if (!this.valid()) return null;
 
     var data = {
-        name: userName.value,
-        email: userEmail.value,
-        password: userPass.value,
-        subscribe: userSubscribe.value,
-    }
+        name: this.name.value,
+        email: this.email.value,
+        password: this.password.value,
+        subscribe: this.subscribe.checked,
+    };
 
     fetch('/login', {
         method:'POST',
         body: JSON.stringify(data)
     });
-}
+};
 
-sendBtn.onclick = send;
-
-function setClearHandler () {
+formManager.setClearHandler = function() {
     var elements = document.querySelectorAll('.auth__text');
     elements.forEach(function(element){
 
@@ -65,4 +73,9 @@ function setClearHandler () {
         }
     });
 }
-setClearHandler();
+formManager.init = function() {
+    this.sendBtn.onclick = this.send.bind(formManager);
+    this.setClearHandler();
+};
+
+formManager.init();
