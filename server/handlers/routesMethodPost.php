@@ -14,6 +14,10 @@ if ($route === '/login') {
         'result' => true,
         'message' => 'Registration Successful',
     ];
+    
+    $request['age'] = 25;
+    addUser ($request);
+    
         echo json_encode ($responce);
     } else {
         $responce = [
