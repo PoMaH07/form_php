@@ -2,7 +2,7 @@
 
 if ($method === 'POST'){ 
 
-if ($route === '/login') {
+if ($route === '/registration') {
     $request = json_decode(file_get_contents('php://input'), true);
     valid($request);
     
@@ -10,15 +10,26 @@ if ($route === '/login') {
     
     
     if ($isValid) {
-    $responce = [
-        'result' => true,
-        'message' => 'Registration Successful',
-    ];
-    
-    $request['age'] = 25;
-    addUser ($request);
-    
-        echo json_encode ($responce);
+        $responceSuccess = [
+            'result' => true,
+                    'message' => 'Registration Successful',
+        ];
+
+        $responceFail = [
+            'result' => false,
+            'message' => 'Data is not valid',
+        ];
+
+        $request['age'] = 25;
+
+        $isSave = addUser($request);
+
+        if($isSave) {
+            echo json_encode($responceSuccess);
+        } else {
+            echo json_encode($responceFail);
+        }
+
     } else {
         $responce = [
         'result' => false,

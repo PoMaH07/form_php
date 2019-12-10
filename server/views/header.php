@@ -14,6 +14,8 @@
             <ul class="header_menu">
                 <li><a class="header_link" href="/">Home</a></li>
                 <li><a class="header_link" href="/login">Login</a></li>
+                <li><a class="header_link" href="/users">Users</a></li>
+                <li><a class="header_link" href="/registration">Registration</a></li>
                 <li><a class="header_link" href="/contacts">Contacts</a></li>
             </ul>
         </nav>
