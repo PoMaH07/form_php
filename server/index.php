@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include './handlers/mysqli.php';
 include './handlers/validate.php';
@@ -9,3 +10,4 @@ $method = $_SERVER['REQUEST_METHOD'];
 include './handlers/routesMethodGet.php';
 
 include './handlers/routesMethodPost.php';
+

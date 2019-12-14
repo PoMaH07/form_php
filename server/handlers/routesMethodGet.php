@@ -1,6 +1,22 @@
 <?php
 
+
 if ($method === 'GET'){
+    
+    if(empty($_SESSION['routes'])) {
+        $_SESSION['routes'] = [];
+    }
+    
+    if(empty($_SESSION['routes'][$route])) {
+        $_SESSION['routes'][$route] = 1;
+    } else {
+         $_SESSION['routes'][$route]++;
+    }
+    
+    $routes_str = '';
+    foreach ($_SESSION['routes'] as $k => $v) {
+        $routes_str .= "{$k} = {$v}, ";
+    }
 
 include './views/header.php';
 
