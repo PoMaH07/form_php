@@ -14,9 +14,14 @@
             <ul class="header_menu">
                 <li><a class="header_link" href="/">Home</a></li>
                 <li><a class="header_link" href="/login">Login</a></li>
+                
+                <?php if($isAdmin) { ?>
                 <li><a class="header_link" href="/users">Users</a></li>
+                <?php }?>
+                
                 <li><a class="header_link" href="/registration">Registration</a></li>
                 <li><a class="header_link" href="/contacts">Contacts</a></li>
+                <li><b><?= $currentUser['username']?></b></li>
             </ul>
         </nav>
         <p>
